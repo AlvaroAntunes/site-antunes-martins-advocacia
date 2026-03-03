@@ -1,8 +1,10 @@
 "use client"
 
-import { Car, Leaf, Scale, FileText, Shield, Gavel, MessageCircle } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Car, Leaf, Scale, FileText, Shield, Gavel } from "lucide-react"
 import ServiceCard from "@/components/ServiceCard"
+import PremiumCTA from "@/components/PremiumCTA"
+import { motion } from "framer-motion"
+import { useScrollAnimation } from "@/hooks/useScrollAnimation"
 
 const services = [
   {
@@ -13,14 +15,14 @@ const services = [
   },
   {
     icon: Leaf,
-    title: "Tráfico de drogas",
+    title: "Tráfico de Drogas",
     description: "Defendemos em casos de tráfico de drogas, buscando penas justas e proporcionais.",
   },
   {
     icon: Scale,
     title: "Tribunal do Júri",
     description:
-      "Atuação especializada em crimes dolosos contra a vida. Estratégias de defesa ou teses defensivas, análise de provas e sustentação oral diante dos jurados.",
+      "Atuação especializada em crimes dolosos contra a vida. Estratégias de defesa, análise de provas e sustentação oral diante dos jurados.",
   },
   {
     icon: FileText,
@@ -31,7 +33,7 @@ const services = [
   {
     icon: Shield,
     title: "Defesa em Processos Criminais",
-    description: "Defendemos em casos de tráfico de drogas, buscando penas justas e proporcionais.",
+    description: "Defesa técnica completa em processos criminais, do inquérito policial à sentença.",
   },
   {
     icon: Gavel,
@@ -42,34 +44,60 @@ const services = [
 ]
 
 export default function AreasSection() {
-  const handleWhatsAppClick = () => {
-    window.open("https://wa.me/5533999999999", "_blank")
-  }
+  const { ref: sectionRef, isInView } = useScrollAnimation({ threshold: 0.05 })
 
   return (
-    <section id="areas-atuacao" className="py-12 sm:py-16 lg:py-24 bg-navy scroll-mt-20">
-      <div className="container mx-auto px-4 lg:px-8">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-center text-white mb-8 sm:mb-12 lg:mb-16 tracking-wider">
-          ÁREAS DE ATUAÇÃO
-        </h2>
+    <section
+      id="areas-atuacao"
+      ref={sectionRef}
+      className="py-16 sm:py-20 lg:py-32 bg-navy scroll-mt-20 relative overflow-hidden"
+    >
+      {/* Decorative background */}
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-gold/[0.015] blur-[120px]" />
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12">
+      <div className="container mx-auto px-4 lg:px-8 relative">
+        {/* Section Title */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center mb-12 sm:mb-16 lg:mb-20"
+        >
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-white tracking-wide">
+            ÁREAS DE ATUAÇÃO
+          </h2>
+          <motion.div
+            initial={{ width: 0 }}
+            animate={isInView ? { width: 80 } : {}}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="h-[2px] bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mt-5"
+          />
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-white/40 font-light text-sm sm:text-base mt-4 max-w-2xl mx-auto"
+          >
+            Atuação especializada nas principais áreas do Direito Criminal
+          </motion.p>
+        </motion.div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-7 mb-12 sm:mb-16">
           {services.map((service, index) => (
-            <ServiceCard key={index} {...service} />
+            <ServiceCard key={index} {...service} index={index} />
           ))}
         </div>
 
         {/* CTA Button */}
-        <div className="flex justify-center px-4">
-          <Button
-            onClick={handleWhatsAppClick}
-            size="lg"
-            className="bg-gold hover:bg-gold/90 text-navy font-semibold px-6 sm:px-10 py-5 sm:py-6 text-sm sm:text-base lg:text-lg rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 w-full sm:w-auto"
-          >
-            <MessageCircle className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-            Entre em contato
-          </Button>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="flex justify-center px-4"
+        >
+          <PremiumCTA label="Fale com uma advogada" />
+        </motion.div>
       </div>
     </section>
   )

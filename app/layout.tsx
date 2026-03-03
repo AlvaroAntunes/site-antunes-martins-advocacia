@@ -1,11 +1,22 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Playfair_Display, Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800", "900"],
+})
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
+})
 
 export const metadata: Metadata = {
   title: "Antunes & Martins | Advogadas Criminalistas em Nanuque-MG",
@@ -20,7 +31,6 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
   },
-  generator: "v0.app",
   icons: {
     icon: [
       {
@@ -41,7 +51,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport = {
-  themeColor: "#1a2332",
+  themeColor: "#0c1220",
   width: "device-width",
   initialScale: 1,
   userScalable: false,
@@ -54,7 +64,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`font-sans antialiased`}>
+      <body className={`${playfair.variable} ${inter.variable} font-sans antialiased`}>
         {children}
         <Analytics />
       </body>
