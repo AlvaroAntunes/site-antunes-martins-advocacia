@@ -16,13 +16,27 @@ const navItems = [
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
     }
+    
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+    
+    // Initial check
+    handleResize()
+    
     window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    window.addEventListener("resize", handleResize)
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      window.removeEventListener("resize", handleResize)
+    }
   }, [])
 
   const scrollToSection = (sectionId: string) => {
@@ -34,7 +48,10 @@ export default function Header() {
       element.scrollIntoView({ behavior: "smooth", block: "start" })
     }
 
-    setIsMobileMenuOpen(false)
+    // Fecha o menu após um pequeno delay para não interferir com o scroll
+    setTimeout(() => {
+      setIsMobileMenuOpen(false)
+    }, 1000)
   }
 
   return (
@@ -42,10 +59,11 @@ export default function Header() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled || isMobile
           ? "glass-premium shadow-2xl shadow-black/20"
           : "bg-transparent"
-        }`}
+      }`}
     >
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-20 lg:h-24">
@@ -126,21 +144,24 @@ export default function Header() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:hidden overflow-hidden"
+              className="lg:hidden overflow-visible"
             >
               <div className="py-6 border-t border-gold/10">
                 <div className="flex flex-col gap-1">
                   {navItems.map((item, index) => (
-                    <motion.button
+                    <motion.div
                       key={item.id}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.3, delay: index * 0.08 }}
-                      onClick={() => scrollToSection(item.id)}
-                      className="text-gold-light/90 hover:text-gold hover:bg-gold/5 transition-all text-[0.9rem] font-medium tracking-[0.08em] uppercase text-left py-3 px-4 rounded-lg"
                     >
-                      {item.label}
-                    </motion.button>
+                      <button
+                        onClick={() => scrollToSection(item.id)}
+                        className="w-full text-gold-light/90 hover:text-gold hover:bg-gold/5 transition-all text-[0.9rem] font-medium tracking-[0.08em] uppercase text-left py-3 px-4 rounded-lg cursor-pointer"
+                      >
+                        {item.label}
+                      </button>
+                    </motion.div>
                   ))}
                 </div>
               </div>

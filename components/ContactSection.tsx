@@ -13,15 +13,19 @@ const contactInfo = [
   },
   {
     icon: Phone,
-    label: "(33) 99950-6493",
+    label: "(33) 99950-6493 (Ana Luiza)",
     href: "https://wa.me/5533999506493",
   },
+  {
+    icon: Phone,
+    label: "(33) 99127-4893 (Giovanna)",
+    href: "https://wa.me/5533991274893",
+  }
 ]
 
 const socialLinks = [
-  { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
-  { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-  { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
+  { icon: Instagram, href: "https://www.instagram.com/antunesemartins.advocacia", label: "Instagram" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/ana-luiza-antunes-de-oliveira-3b08182b9", label: "LinkedIn" },
 ]
 
 export default function ContactSection() {
@@ -85,12 +89,12 @@ export default function ContactSection() {
                   <MapPin className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-gold/70" />
                 </div>
                 <a
-                  href="https://www.google.com/maps/search/?api=1&query=Av.+Rangel+Pestana,+243,+Nanuque,+MG"
+                  href="https://www.google.com/maps/search/?api=1&query=Advogada+em+Nanuque+-+Antunes+&+Martins+Advocacia+Especializada"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm sm:text-base lg:text-lg font-light hover:text-gold transition-colors underline-offset-2 hover:text-gold transition-colors"
                 >
-                  Av. Rangel Pestana, 243 - 1&ordm; andar
+                  Rua Caxambú, 230
                   <br />
                   Centro, Nanuque - MG, 39860-000
                 </a>
@@ -143,7 +147,7 @@ export default function ContactSection() {
             className="relative h-[300px] sm:h-[400px] lg:h-[600px] rounded-xl overflow-hidden shadow-2xl shadow-black/30 border border-gold/[0.06]"
           >
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.8!2d-40.3456!3d-17.8397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTfCsDUwJzIzLjAiUyA0MMKwMjAnNDQuMiJX!5e0!3m2!1sen!2sbr!4v1234567890"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6745.354209208903!2d-40.34765742538296!3d-17.8400084831264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb539eb68eb8677%3A0x81f6298de2f8425f!2sAdvogada%20em%20Nanuque%20-%20Antunes%20%26%20Martins%20Advocacia%20Especializada!5e1!3m2!1sen!2sus!4v1772570842412!5m2!1sen!2sus"
               width="100%"
               height="100%"
               style={{ border: 0 }}

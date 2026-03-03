@@ -125,15 +125,25 @@ export default function HeroSection() {
             transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="hidden lg:flex relative items-end justify-end h-[700px] xl:h-[800px]"
           >
+            {/* Glow effect behind image */}
+            <div className="absolute bottom-[10%] right-[-2rem] w-[400px] h-[500px] bg-gold/20 blur-[100px] rounded-full" />
+            <div className="absolute bottom-[15%] right-[0rem] w-[350px] h-[450px] bg-gold/10 blur-[80px] rounded-full" />
+            
             <div className="absolute bottom-0 right-[-5rem] w-auto h-full">
+              {/* Shadow layers for depth */}
+              <div className="absolute inset-0 bg-gradient-to-t from-gold/20 via-transparent to-transparent blur-2xl" />
+              
               <Image
                 src="/images/imagem-inicio.png"
                 alt="Advogadas Antunes & Martins"
                 width={600}
                 height={800}
-                className="h-full w-auto object-bottom scale-200"
+                className="h-full w-auto object-bottom scale-200 drop-shadow-[0_20px_60px_rgba(212,175,55,0.3)] brightness-105 contrast-105"
                 priority
               />
+              
+              {/* Subtle border glow */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gold/5 to-gold/10 rounded-lg blur-sm" />
             </div>
           </motion.div>
         </div>
