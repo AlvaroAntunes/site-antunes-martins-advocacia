@@ -10,7 +10,10 @@ export function Footer() {
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
-    if (element) {
+    
+    if (sectionId === "inicio") {
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    } else if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" })
     }
   }
@@ -48,6 +51,7 @@ export function Footer() {
             </h3>
             <ul className="space-y-3 text-sm">
               {[
+                { label: "Início", id: "inicio" },
                 { label: "Quem Somos", id: "quem-somos" },
                 { label: "Áreas de Atuação", id: "areas-atuacao" },
                 { label: "Contato", id: "contato" },
